@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Controller: {fileID: 655592609}
-  m_Animator: {fileID: 1012353624}
+  m_Animator: {fileID: 159392463}
   m_Speed: 8
 --- !u!1 &279973144
 GameObject:
@@ -697,7 +697,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &599873044
 GameObject:
@@ -1170,7 +1170,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &705507993
 GameObject:
