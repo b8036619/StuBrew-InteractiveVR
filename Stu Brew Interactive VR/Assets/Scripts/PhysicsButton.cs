@@ -14,8 +14,8 @@ public class PhysicsButton : MonoBehaviour
     private float upperLowerDiff;
     public bool isPressed;
     private bool prevPressedState;
-    public AudioSource pressedSound;
-    public AudioSource releasedSound;
+    //public AudioSource pressedSound;
+    //public AudioSource releasedSound;
     public Collider[] CollidersToIgnore;
     public UnityEvent onPressed;
     public UnityEvent onReleased;
@@ -42,7 +42,9 @@ public class PhysicsButton : MonoBehaviour
             transform.eulerAngles = savedAngle;
         }
         else
+        {
             upperLowerDiff = buttonUpperLimit.position.y - buttonLowerLimit.position.y;
+        }
     }
 
     // Update is called once per frame
@@ -53,21 +55,32 @@ public class PhysicsButton : MonoBehaviour
         if (buttonTop.localPosition.y >= 0)
             buttonTop.transform.position = new Vector3(buttonUpperLimit.position.x, buttonUpperLimit.position.y, buttonUpperLimit.position.z);
         else
+        {
             buttonTopRigid.AddForce(buttonTop.transform.up * force * Time.deltaTime);
+        }
 
         if (buttonTop.localPosition.y <= buttonLowerLimit.localPosition.y)
+        {
             buttonTop.transform.position = new Vector3(buttonLowerLimit.position.x, buttonLowerLimit.position.y, buttonLowerLimit.position.z);
-
+        }
 
         if (Vector3.Distance(buttonTop.position, buttonLowerLimit.position) < upperLowerDiff * threshHold)
+        {
             isPressed = true;
+        }
         else
+        {
             isPressed = false;
+        }
 
         if (isPressed && prevPressedState != isPressed)
+        {
             Pressed();
+        }
         if (!isPressed && prevPressedState != isPressed)
+        {
             Released();
+        }
     }
 
     // void FixedUpdate(){
@@ -81,16 +94,16 @@ public class PhysicsButton : MonoBehaviour
     void Pressed()
     {
         prevPressedState = isPressed;
-        pressedSound.pitch = 1;
-        pressedSound.Play();
+        //pressedSound.pitch = 1;
+        //pressedSound.Play();
         onPressed.Invoke();
     }
 
     void Released()
     {
         prevPressedState = isPressed;
-        releasedSound.pitch = Random.Range(1.1f, 1.2f);
-        releasedSound.Play();
+        //releasedSound.pitch = Random.Range(1.1f, 1.2f);
+        //releasedSound.Play();
         onReleased.Invoke();
     }
 }
