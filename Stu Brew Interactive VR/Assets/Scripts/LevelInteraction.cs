@@ -34,6 +34,7 @@ public class LevelInteraction : MonoBehaviour
         fermenting = 0;
         time = 0;
         time2 = 0;
+        whiteboard.text = "";
     }
 
     // Update is called once per frame
@@ -43,9 +44,11 @@ public class LevelInteraction : MonoBehaviour
         {
             case 0:
                 display1.text = "Add Water";
+                whiteboard.text = "Add water to the mash tun";
                 break;
             case 1:
                 display1.text = "Heat Water";
+                whiteboard.text = "Heat the water in the mash tun to 78c";
                 break;
             case 2:
                 time = time + Time.deltaTime;
@@ -53,6 +56,7 @@ public class LevelInteraction : MonoBehaviour
                 
                 if (temp == 78) { 
                     display1.text = "Add Malt";
+                    whiteboard.text = "Collect the bucket of malt from the shelf and pour it into the mash tun";
                     if (MaltPos())
                     {
                         stageFinished = true;
@@ -73,26 +77,32 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 3:
                 display1.text = "Mix";
+                whiteboard.text = "Mix the water and malt in the mash tun";
                 break;
             case 4:
                 display1.text = "Send";
+                whiteboard.text = "Pump out the mash into the lauter tun";
                 break;
             case 5:
                 display1.text = "Empty";
                 display2.text = "Mix";
+                whiteboard.text = "Mix the mash to separate liquid from the grain";
                 break;
             case 6:
                 display2.text = "Send";
+                whiteboard.text = "Pump out the wort into the brew kettle";
                 break;
             case 7:
                 display2.text = "Empty";
                 display3.text = "Add Hops";
+                whiteboard.text = "Collect the bucket of hops from the shelf and pour it into the brew kettle";
                 if (HopsPos()) { 
                     stage++;
                 }
                 break;
             case 8:
                 display3.text = "Heat";
+                whiteboard.text = "Heat the wort to 85c for upto 2 hours";
                 break;
             case 9:
                 time = time + Time.deltaTime;
@@ -115,10 +125,12 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 10:
                 display3.text = "Send";
+                whiteboard.text = "Pump out the wort into the whirlpool to separate the solid particles";
                 break;
             case 11:
                 display3.text = "Empty";
                 display4.text = "Cool";
+                whiteboard.text = "Pump the wort through the plate heat exchanger to cool";
                 break;
             case 12:
                 time = time + Time.deltaTime;
@@ -140,10 +152,12 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 13:
                 display4.text = "Send";
+                whiteboard.text = "Pump out the wort to the fermentation tank";
                 break;
             case 14:
                 display4.text = "Empty";
                 display5.text = "Add Yeast";
+                whiteboard.text = "Collect the bucket of yeast from the shelf and pour it into the fermentation tank";
                 if (YeastPos())
                 {
                     stage++;
@@ -152,6 +166,8 @@ public class LevelInteraction : MonoBehaviour
             case 15:
                 stageFinished = false;
                 time2 = time2 + Time.deltaTime;
+
+                whiteboard.text = "The beer is fermenting";
 
                 if (time2 > 0.3) {
                     switch (fermenting)
@@ -187,10 +203,11 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 16:
                 display5.text = "Send";
+                whiteboard.text = "Pump out the beer into the storage tank";
                 break;
             case 17:
                 display5.text = "Empty";
-
+                whiteboard.text = "The beer is left in the storage tank for upto 3 months";
                 break;
         }
 
