@@ -6,7 +6,6 @@ using TMPro;
 public class LevelInteraction : MonoBehaviour
 {
     private int stage = 0;
-    private bool stageFinished = true;
 
     public TextMeshPro whiteboard;
 
@@ -17,7 +16,7 @@ public class LevelInteraction : MonoBehaviour
     public TextMeshPro display5;
 
     private int temp = 20;
-    private int fermenting = 0;
+    private int loopCounter = 0;
     private float time = 0;
     private float time2 = 0;
 
@@ -29,9 +28,8 @@ public class LevelInteraction : MonoBehaviour
     void Start()
     {
         stage = 0;
-        stageFinished = true;
         temp = 20;
-        fermenting = 0;
+        loopCounter = 0;
         time = 0;
         time2 = 0;
         whiteboard.text = "";
@@ -44,157 +42,189 @@ public class LevelInteraction : MonoBehaviour
         {
             case 0:
                 display1.text = "Add Water";
-                whiteboard.text = "Add water to the mash tun";
+                whiteboard.text = "Add water to the hot liquor tank";
                 break;
             case 1:
                 display1.text = "Heat Water";
-                whiteboard.text = "Heat the water in the mash tun to 78c";
+                whiteboard.text = "Heat the water in the hot liquor tank to 78c";
                 break;
             case 2:
                 time = time + Time.deltaTime;
                 display1.text = "Temp: " + temp.ToString() + "c";
-                
-                if (temp == 78) { 
-                    display1.text = "Add Malt";
-                    whiteboard.text = "Collect the bucket of malt from the shelf and pour it into the mash tun";
-                    if (MaltPos())
-                    {
-                        stageFinished = true;
-                        stage++;
-                        temp = 60;
-                        time = 0;
-                    }
+                if (temp == 78)
+                {
+                    stage++;
+                    time = 0;
                 }
-                else {
+                else
+                {
                     if (time > 0.2)
                     {
                         time = 0;
                         temp++;
                     }
-                    stageFinished = false;
                 }
-
                 break;
             case 3:
-                display1.text = "Mix";
-                whiteboard.text = "Mix the water and malt in the mash tun";
+                display1.text = "Pump";
+                whiteboard.text = "Pump out the water into the mash tun";
                 break;
             case 4:
-                display1.text = "Send";
-                whiteboard.text = "Pump out the mash into the lauter tun";
+                display2.text = "Add Malt";
+                display1.text = "Holding Water";
+                whiteboard.text = "Collect the bucket of malt from the shelf and pour it into the mash tun";
+                if (MaltPos())
+                {
+                    stage++;
+                }
                 break;
             case 5:
-                display1.text = "Empty";
                 display2.text = "Mix";
-                whiteboard.text = "Mix the mash to separate liquid from the grain";
+                whiteboard.text = "Mix the grain and water to create the mash";
                 break;
             case 6:
-                display2.text = "Send";
-                whiteboard.text = "Pump out the wort into the brew kettle";
-                break;
-            case 7:
-                display2.text = "Empty";
-                display3.text = "Add Hops";
-                whiteboard.text = "Collect the bucket of hops from the shelf and pour it into the brew kettle";
-                if (HopsPos()) { 
-                    stage++;
-                }
-                break;
-            case 8:
-                display3.text = "Heat";
-                whiteboard.text = "Heat the wort to 85c for upto 2 hours";
-                break;
-            case 9:
-                time = time + Time.deltaTime;
-                stageFinished = false;
-                display3.text = "Temp: " + temp.ToString() + "c";
-                if (temp == 85)
-                {
-                    stageFinished = true;
-                    stage++;
-                    time = 0;
-                }
-                else
-                {
-                    if (time > 0.2)
-                    {
-                        time = 0;
-                        temp++;
-                    }
-                }
-                break;
-            case 10:
-                display3.text = "Send";
-                whiteboard.text = "Pump out the wort into the whirlpool to separate the solid particles";
-                break;
-            case 11:
-                display3.text = "Empty";
-                display4.text = "Cool";
-                whiteboard.text = "Pump the wort through the plate heat exchanger to cool";
-                break;
-            case 12:
-                time = time + Time.deltaTime;
-                stageFinished = false;
-                display4.text = "Temp: " + temp.ToString() + "c";
-                if (temp == 10)
-                {
-                    stageFinished = true;
-                    stage++;
-                    time = 0;
-                }
-                else
-                {
-                    if (time > 0.2) {
-                        time = 0;
-                        temp--; 
-                    }
-                }
-                break;
-            case 13:
-                display4.text = "Send";
-                whiteboard.text = "Pump out the wort to the fermentation tank";
-                break;
-            case 14:
-                display4.text = "Empty";
-                display5.text = "Add Yeast";
-                whiteboard.text = "Collect the bucket of yeast from the shelf and pour it into the fermentation tank";
-                if (YeastPos())
-                {
-                    stage++;
-                }
-                break;
-            case 15:
-                stageFinished = false;
+                whiteboard.text = "Leave mash for 1 hour";
+
                 time2 = time2 + Time.deltaTime;
 
-                whiteboard.text = "The beer is fermenting";
-
-                if (time2 > 0.3) {
-                    switch (fermenting)
+                if (time2 > 0.3)
+                {
+                    switch (loopCounter)
                     {
                         case 0:
-                            display5.text = "Fermenting";
-                            fermenting++;
+                            display2.text = "Rest";
+                            loopCounter++;
                             break;
                         case 1:
-                            display5.text = "Fermenting.";
-                            fermenting++;
+                            display2.text = "Rest.";
+                            loopCounter++;
                             break;
                         case 2:
-                            display5.text = "Fermenting..";
-                            fermenting++;
+                            display2.text = "Rest..";
+                            loopCounter++;
                             break;
                         case 3:
-                            display5.text = "Fermenting...";
-                            fermenting = 0;
+                            display2.text = "Rest...";
+                            loopCounter = 0;
                             break;
                     }
                     time2 = 0;
                 }
                 if (time > 10)
                 {
-                    stageFinished = true;
                     stage++;
+                    time = 0;
+                }
+                else
+                {
+                    time = time + Time.deltaTime;
+                }
+
+                break;
+            case 7:
+                display2.text = "Pump";
+                display3.text = "Holding Malt";
+                whiteboard.text = "Pump out the mash into the kettle";
+                break;
+            case 8:
+                display2.text = "Sparge";
+                whiteboard.text = "Sparge the grain by pumping hot water from the hot liquor tank";
+                break;
+            case 9:
+                display2.text = "Pump";
+                whiteboard.text = "Pump the mash into the kettle";
+                break;
+            case 10:
+                display3.text = "Add Hops";
+                whiteboard.text = "Collect the bucket of hops from the shelf and pour it into the kettle";
+                if (HopsPos())
+                {
+                    stage++;
+                }
+                break;
+            case 11:
+                display3.text = "Heat";
+                whiteboard.text = "Boil wort for 1 hour";
+                break;
+            case 12:
+                time2 = time2 + Time.deltaTime;
+
+                if (time2 > 0.3)
+                {
+                    switch (loopCounter)
+                    {
+                        case 0:
+                            display3.text = "Boiling";
+                            loopCounter++;
+                            break;
+                        case 1:
+                            display3.text = "Boiling.";
+                            loopCounter++;
+                            break;
+                        case 2:
+                            display3.text = "Boiling..";
+                            loopCounter++;
+                            break;
+                        case 3:
+                            display3.text = "Boiling...";
+                            loopCounter = 0;
+                            break;
+                    }
+                    time2 = 0;
+                }
+                if (time > 10)
+                {
+                    stage++;
+                    time = 0;
+                }
+                else
+                {
+                    time = time + Time.deltaTime;
+                }
+                break;
+            case 13:
+                display3.text = "Pump";
+                whiteboard.text = "Pump out the wort to the heat exchanger";
+                break;
+            case 14:
+                display3.text = "Empty";
+                display4.text = "Add Yeast";
+                whiteboard.text = "Add yeast to fermentation vessel and ferment for 4 days";
+                if (YeastPos())
+                {
+                    stage++;
+                }
+                break;
+            case 15:
+                time2 = time2 + Time.deltaTime;
+
+                if (time2 > 0.3)
+                {
+                    switch (loopCounter)
+                    {
+                        case 0:
+                            display4.text = "Fermenting";
+                            loopCounter++;
+                            break;
+                        case 1:
+                            display4.text = "Fermenting.";
+                            loopCounter++;
+                            break;
+                        case 2:
+                            display4.text = "Fermenting..";
+                            loopCounter++;
+                            break;
+                        case 3:
+                            display4.text = "Fermenting...";
+                            loopCounter = 0;
+                            break;
+                    }
+                    time2 = 0;
+                }
+                if (time > 10)
+                {
+                    stage++;
+                    time = 0;
                 }
                 else
                 {
@@ -202,12 +232,8 @@ public class LevelInteraction : MonoBehaviour
                 }
                 break;
             case 16:
-                display5.text = "Send";
-                whiteboard.text = "Pump out the beer into the storage tank";
-                break;
-            case 17:
-                display5.text = "Empty";
-                whiteboard.text = "The beer is left in the storage tank for upto 3 months";
+
+
                 break;
         }
 
@@ -216,10 +242,7 @@ public class LevelInteraction : MonoBehaviour
 
     private void NextStage()
     {
-        if (stageFinished)
-        {
-            stage++;
-        }
+        stage++;
     }
 
     public void Water1() { 
@@ -228,10 +251,6 @@ public class LevelInteraction : MonoBehaviour
     public void Heat1()
     {
         if (stage == 1) { NextStage(); }
-    }
-    public void Mix1()
-    {
-        if (stage == 3) { NextStage(); }
     }
     public void Send1()
     {
@@ -268,7 +287,7 @@ public class LevelInteraction : MonoBehaviour
 
     private bool MaltPos() {
 
-        if ((Malt.transform.position.x < 2.13f && Malt.transform.position.x > 1.68f)
+        if ((Malt.transform.position.x < -0.03f && Malt.transform.position.x > -0.5f)
             && (Malt.transform.position.y < 4.5f && Malt.transform.position.y > 3.2f)
             && (Malt.transform.position.z < 3.85f && Malt.transform.position.z > 3.35f))
         {
