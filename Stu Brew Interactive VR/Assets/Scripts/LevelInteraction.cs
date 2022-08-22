@@ -13,7 +13,6 @@ public class LevelInteraction : MonoBehaviour
     public TextMeshPro display2;
     public TextMeshPro display3;
     public TextMeshPro display4;
-    public TextMeshPro display5;
 
     private int temp = 20;
     private int loopCounter = 0;
@@ -23,6 +22,18 @@ public class LevelInteraction : MonoBehaviour
     public GameObject Malt;
     public GameObject Hops;
     public GameObject Yeast;
+
+    public Material red;
+    public Material green;
+
+    public GameObject button1;
+    public GameObject button2;
+    public GameObject button3;
+    public GameObject button4;
+    public GameObject button5;
+    public GameObject button6;
+    public GameObject button7;
+    public GameObject button8;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +54,16 @@ public class LevelInteraction : MonoBehaviour
             case 0:
                 display1.text = "Add Water";
                 whiteboard.text = "Add water to the hot liquor tank";
+                button1.GetComponent<MeshRenderer>().material = green;
                 break;
             case 1:
                 display1.text = "Heat Water";
                 whiteboard.text = "Heat the water in the hot liquor tank to 78c";
+                button1.GetComponent<MeshRenderer>().material = red;
+                button2.GetComponent<MeshRenderer>().material = green;
                 break;
             case 2:
+                button2.GetComponent<MeshRenderer>().material = red;
                 time = time + Time.deltaTime;
                 display1.text = "Temp: " + temp.ToString() + "c";
                 if (temp == 78)
@@ -68,8 +83,10 @@ public class LevelInteraction : MonoBehaviour
             case 3:
                 display1.text = "Pump";
                 whiteboard.text = "Pump out the water into the mash tun";
+                button3.GetComponent<MeshRenderer>().material = green;
                 break;
             case 4:
+                button3.GetComponent<MeshRenderer>().material = red;
                 display2.text = "Add Malt";
                 display1.text = "Holding Water";
                 whiteboard.text = "Collect the bucket of malt from the shelf and pour it into the mash tun";
@@ -81,8 +98,11 @@ public class LevelInteraction : MonoBehaviour
             case 5:
                 display2.text = "Mix";
                 whiteboard.text = "Mix the grain and water to create the mash";
+                button4.GetComponent<MeshRenderer>().material = green;
                 break;
             case 6:
+                button4.GetComponent<MeshRenderer>().material = red;
+
                 whiteboard.text = "Leave mash for 1 hour";
 
                 time2 = time2 + Time.deltaTime;
@@ -125,28 +145,37 @@ public class LevelInteraction : MonoBehaviour
                 display2.text = "Pump";
                 display3.text = "Holding Malt";
                 whiteboard.text = "Pump out the mash into the kettle";
+                button5.GetComponent<MeshRenderer>().material = green;
                 break;
             case 8:
                 display2.text = "Sparge";
                 whiteboard.text = "Sparge the grain by pumping hot water from the hot liquor tank";
+                button5.GetComponent<MeshRenderer>().material = red;
+                button3.GetComponent<MeshRenderer>().material = green;
                 break;
             case 9:
                 display2.text = "Pump";
                 whiteboard.text = "Pump the mash into the kettle";
+                button3.GetComponent<MeshRenderer>().material = red;
+                button5.GetComponent<MeshRenderer>().material = green;
                 break;
             case 10:
+                display2.text = "Empty";
                 display3.text = "Add Hops";
                 whiteboard.text = "Collect the bucket of hops from the shelf and pour it into the kettle";
                 if (HopsPos())
                 {
                     stage++;
                 }
+                button5.GetComponent<MeshRenderer>().material = red;
                 break;
             case 11:
                 display3.text = "Heat";
                 whiteboard.text = "Boil wort for 1 hour";
+                button6.GetComponent<MeshRenderer>().material = green;
                 break;
             case 12:
+                button6.GetComponent<MeshRenderer>().material = red;
                 time2 = time2 + Time.deltaTime;
 
                 if (time2 > 0.3)
@@ -184,9 +213,11 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 13:
                 display3.text = "Pump";
-                whiteboard.text = "Pump out the wort to the heat exchanger";
+                whiteboard.text = "Pump out the wort through the heat exchanger to the fermentation vessel";
+                button7.GetComponent<MeshRenderer>().material = green;
                 break;
             case 14:
+                button7.GetComponent<MeshRenderer>().material = red;
                 display3.text = "Empty";
                 display4.text = "Add Yeast";
                 whiteboard.text = "Add yeast to fermentation vessel and ferment for 4 days";
@@ -232,7 +263,14 @@ public class LevelInteraction : MonoBehaviour
                 }
                 break;
             case 16:
+                display4.text = "Pump";
+                whiteboard.text = "";
+                button8.GetComponent<MeshRenderer>().material = green;
 
+                break;
+            case 17:
+                display4.text = "Empty";
+                button8.GetComponent<MeshRenderer>().material = red;
 
                 break;
         }
@@ -252,35 +290,29 @@ public class LevelInteraction : MonoBehaviour
     {
         if (stage == 1) { NextStage(); }
     }
-    public void Send1()
+    public void Pump1()
     {
-        if (stage == 4) { NextStage(); }
+        if (stage == 3) { NextStage(); }
+        if (stage == 8) { NextStage(); }
     }
     public void Mix2()
     {
         if (stage == 5) { NextStage(); }
     }
-    public void Send2()
+    public void Pump2()
     {
-        if (stage == 6) { NextStage(); }
+        if (stage == 7) { NextStage(); }
+        if (stage == 9) { NextStage(); }
     }
     public void Heat3()
     {
-        if (stage == 8) { NextStage(); }
-    }
-    public void Send3()
-    {
-        if (stage == 10) { NextStage(); }
-    }
-    public void Cool4()
-    {
         if (stage == 11) { NextStage(); }
     }
-    public void Send4()
+    public void Pump3()
     {
         if (stage == 13) { NextStage(); }
     }
-    public void Send5()
+    public void Pump4()
     {
         if (stage == 16) { NextStage(); }
     }
