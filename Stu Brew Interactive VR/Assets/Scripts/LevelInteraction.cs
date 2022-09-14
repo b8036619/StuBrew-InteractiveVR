@@ -7,7 +7,7 @@ public class LevelInteraction : MonoBehaviour
 {
     private int stage = 0;
 
-    public TextMeshPro whiteboard;
+    //public TextMeshPro whiteboard;
 
     public TextMeshPro display1;
     public TextMeshPro display2;
@@ -35,6 +35,9 @@ public class LevelInteraction : MonoBehaviour
     public GameObject button7;
     public GameObject button8;
 
+    public Whiteboard whiteboardInstructions;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +46,6 @@ public class LevelInteraction : MonoBehaviour
         loopCounter = 0;
         time = 0;
         time2 = 0;
-        whiteboard.text = "";
     }
 
     // Update is called once per frame
@@ -53,12 +55,12 @@ public class LevelInteraction : MonoBehaviour
         {
             case 0:
                 display1.text = "Add Water";
-                whiteboard.text = "Add water to the hot liquor tank";
+                
                 button1.GetComponent<MeshRenderer>().material = green;
                 break;
             case 1:
                 display1.text = "Heat Water";
-                whiteboard.text = "Heat the water in the hot liquor tank to 78c";
+                whiteboardInstructions.NewTask();
                 button1.GetComponent<MeshRenderer>().material = red;
                 button2.GetComponent<MeshRenderer>().material = green;
                 break;
@@ -82,14 +84,14 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 3:
                 display1.text = "Pump";
-                whiteboard.text = "Pump out the water into the mash tun";
+                whiteboardInstructions.NewTask();
                 button3.GetComponent<MeshRenderer>().material = green;
                 break;
             case 4:
                 button3.GetComponent<MeshRenderer>().material = red;
                 display2.text = "Add Malt";
                 display1.text = "Holding Water";
-                whiteboard.text = "Collect the bucket of malt from the shelf and pour it into the mash tun";
+                whiteboardInstructions.NewTask();
                 if (MaltPos())
                 {
                     stage++;
@@ -97,13 +99,13 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 5:
                 display2.text = "Mix";
-                whiteboard.text = "Mix the grain and water to create the mash";
+                whiteboardInstructions.NewTask();
                 button4.GetComponent<MeshRenderer>().material = green;
                 break;
             case 6:
                 button4.GetComponent<MeshRenderer>().material = red;
 
-                whiteboard.text = "Leave mash for 1 hour";
+                whiteboardInstructions.NewTask();
 
                 time2 = time2 + Time.deltaTime;
 
@@ -144,25 +146,25 @@ public class LevelInteraction : MonoBehaviour
             case 7:
                 display2.text = "Pump";
                 display3.text = "Holding Malt";
-                whiteboard.text = "Pump out the mash into the kettle";
+                whiteboardInstructions.NewTask();
                 button5.GetComponent<MeshRenderer>().material = green;
                 break;
             case 8:
                 display2.text = "Sparge";
-                whiteboard.text = "Sparge the grain by pumping hot water from the hot liquor tank";
+                whiteboardInstructions.NewTask();
                 button5.GetComponent<MeshRenderer>().material = red;
                 button3.GetComponent<MeshRenderer>().material = green;
                 break;
             case 9:
                 display2.text = "Pump";
-                whiteboard.text = "Pump the mash into the kettle";
+                whiteboardInstructions.NewTask();
                 button3.GetComponent<MeshRenderer>().material = red;
                 button5.GetComponent<MeshRenderer>().material = green;
                 break;
             case 10:
                 display2.text = "Empty";
                 display3.text = "Add Hops";
-                whiteboard.text = "Collect the bucket of hops from the shelf and pour it into the kettle";
+                whiteboardInstructions.NewTask();
                 if (HopsPos())
                 {
                     stage++;
@@ -171,7 +173,7 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 11:
                 display3.text = "Heat";
-                whiteboard.text = "Boil wort for 1 hour";
+                whiteboardInstructions.NewTask();
                 button6.GetComponent<MeshRenderer>().material = green;
                 break;
             case 12:
@@ -213,14 +215,14 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 13:
                 display3.text = "Pump";
-                whiteboard.text = "Pump out the wort through the heat exchanger to the fermentation vessel";
+                whiteboardInstructions.NewTask();
                 button7.GetComponent<MeshRenderer>().material = green;
                 break;
             case 14:
                 button7.GetComponent<MeshRenderer>().material = red;
                 display3.text = "Empty";
                 display4.text = "Add Yeast";
-                whiteboard.text = "Add yeast to fermentation vessel and ferment for 4 days";
+                whiteboardInstructions.NewTask();
                 if (YeastPos())
                 {
                     stage++;
@@ -264,7 +266,7 @@ public class LevelInteraction : MonoBehaviour
                 break;
             case 16:
                 display4.text = "Pump";
-                whiteboard.text = "";
+                //whiteboard.text = "";
                 button8.GetComponent<MeshRenderer>().material = green;
 
                 break;
