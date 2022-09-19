@@ -37,6 +37,12 @@ public class LevelInteraction : MonoBehaviour
 
     public Whiteboard whiteboardInstructions;
 
+    public GameObject liquid1;
+    public GameObject liquid2;
+    public GameObject liquid3;
+    public GameObject liquid4;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +52,13 @@ public class LevelInteraction : MonoBehaviour
         loopCounter = 0;
         time = 0;
         time2 = 0;
+
+        liquid1.transform.position = new Vector3(liquid1.transform.position.x, -1.5f ,liquid1.transform.position.z);
+        liquid2.transform.position = new Vector3(liquid2.transform.position.x, -1.5f, liquid2.transform.position.z);
+        liquid3.transform.position = new Vector3(liquid3.transform.position.x, -1.5f, liquid3.transform.position.z);
+        //liquid4.transform.position = new Vector3(liquid4.transform.position.x, -1.5f, liquid4.transform.position.z);
+
+
     }
 
     // Update is called once per frame
