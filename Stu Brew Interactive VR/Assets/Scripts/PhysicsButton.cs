@@ -14,8 +14,6 @@ public class PhysicsButton : MonoBehaviour
     private float upperLowerDiff;
     public bool isPressed;
     private bool prevPressedState;
-    //public AudioSource pressedSound;
-    //public AudioSource releasedSound;
     public Collider[] CollidersToIgnore;
     public UnityEvent onPressed;
     public UnityEvent onReleased;
@@ -83,27 +81,15 @@ public class PhysicsButton : MonoBehaviour
         }
     }
 
-    // void FixedUpdate(){
-    //     Vector3 localVelocity = transform.InverseTransformDirection(buttonTop.GetComponent<Rigidbody>().velocity);
-    //     Rigidbody rb = buttonTop.GetComponent<Rigidbody>();
-    //     localVelocity.x = 0;
-    //     localVelocity.z = 0;
-    //     rb.velocity = transform.TransformDirection(localVelocity);
-    // }
-
     void Pressed()
     {
         prevPressedState = isPressed;
-        //pressedSound.pitch = 1;
-        //pressedSound.Play();
         onPressed.Invoke();
     }
 
     void Released()
     {
         prevPressedState = isPressed;
-        //releasedSound.pitch = Random.Range(1.1f, 1.2f);
-        //releasedSound.Play();
         onReleased.Invoke();
     }
 }

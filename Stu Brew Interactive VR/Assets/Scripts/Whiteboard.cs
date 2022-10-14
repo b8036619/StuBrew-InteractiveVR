@@ -15,14 +15,19 @@ public class Whiteboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentTaskNo = 0;
-        SetText();
+        ResetLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ResetLevel()
+    {
+        currentTaskNo = 0;
+        SetText();
     }
 
     public void NewTask()
@@ -68,7 +73,11 @@ public class Whiteboard : MonoBehaviour
                 return "Pump out the wort through the heat exchanger to the fermentation vessel";
             case 12:
                 return "Add yeast to fermentation vessel and ferment for 4 days";
-            
+            case 13:
+                return "Pump out the completed beer";
+            case 14:
+                return "The Beer is now completed. It is held in a storage tank ready to be packaged";
+
             default:
                 return "";
 

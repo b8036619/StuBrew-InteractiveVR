@@ -13,12 +13,7 @@ public class Liquid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        liquid1.transform.position = new Vector3(liquid1.transform.position.x, -1.5f, liquid1.transform.position.z);
-        liquid2.transform.position = new Vector3(liquid2.transform.position.x, -1.5f, liquid2.transform.position.z);
-        liquid3.transform.position = new Vector3(liquid3.transform.position.x, -1.5f, liquid3.transform.position.z);
-        liquid4.transform.position = new Vector3(liquid4.transform.position.x, 1.3f, liquid4.transform.position.z);
-        liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, 0.01f, liquid4.transform.localScale.z);
-        
+        ResetLevel();
 
     }
 
@@ -48,8 +43,8 @@ public class Liquid : MonoBehaviour
                 {
                     break;
                 }
-                liquid4.transform.position = new Vector3(liquid4.transform.position.x, (liquid4.transform.position.y + 0.0070f), liquid4.transform.position.z);
-                liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, (liquid4.transform.localScale.y + 0.0030f), liquid4.transform.localScale.z);
+                liquid4.transform.position = new Vector3(liquid4.transform.position.x, (liquid4.transform.position.y + 0.0035f), liquid4.transform.position.z);
+                liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, (liquid4.transform.localScale.y + 0.0015f), liquid4.transform.localScale.z);
                 break;
 
 
@@ -67,8 +62,8 @@ public class Liquid : MonoBehaviour
                 {
                     break;
                 }
-                liquid4.transform.position = new Vector3(liquid4.transform.position.x, (liquid4.transform.position.y - 0.0070f), liquid4.transform.position.z);
-                liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, (liquid4.transform.localScale.y - 0.0030f), liquid4.transform.localScale.z);
+                liquid4.transform.position = new Vector3(liquid4.transform.position.x, (liquid4.transform.position.y - 0.0035f), liquid4.transform.position.z);
+                liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, (liquid4.transform.localScale.y - 0.0015f), liquid4.transform.localScale.z);
                 break;
         }
     }
@@ -98,4 +93,15 @@ public class Liquid : MonoBehaviour
         }
     }
 
+    public void ResetLevel()
+    {
+        liquid1.transform.position = new Vector3(liquid1.transform.position.x, -1.5f, liquid1.transform.position.z);
+        liquid2.transform.position = new Vector3(liquid2.transform.position.x, -1.5f, liquid2.transform.position.z);
+        liquid3.transform.position = new Vector3(liquid3.transform.position.x, -1.5f, liquid3.transform.position.z);
+        liquid4.transform.position = new Vector3(liquid4.transform.position.x, 1.3f, liquid4.transform.position.z);
+        liquid4.transform.localScale = new Vector3(liquid4.transform.localScale.x, 0.01f, liquid4.transform.localScale.z);
+    }
+
 }
+
+

@@ -21,9 +21,10 @@ public class LevelInteraction : MonoBehaviour
     private float liquidClock = 0;
     private bool liquidTick = false;
 
-    public GameObject Malt;
-    public GameObject Hops;
-    public GameObject Yeast;
+    public GameObject malt;
+    public GameObject hops;
+    public GameObject yeast;
+    private Quaternion bucketRotation;
 
     public Material red;
     public Material green;
@@ -45,14 +46,8 @@ public class LevelInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = 0;
-        temp = 20;
-        loopCounter = 0;
-        time = 0;
-        time2 = 0;
-        liquidClock = 0;
-        liquidTick = false;
-
+        bucketRotation = malt.transform.rotation;
+        ResetLevel();
     }
 
     // Update is called once per frame
@@ -65,7 +60,6 @@ public class LevelInteraction : MonoBehaviour
         switch (stage)
         {
             case 0:
-                //if (liquidTick) { liquids.LiquidUpdate(1); liquids.LiquidUpdate(2); }
                 display1.text = "Add Water";
                 button1.GetComponent<MeshRenderer>().material = green;
                 break;
@@ -267,6 +261,7 @@ public class LevelInteraction : MonoBehaviour
                 {
                     stage++;
                     time = 0;
+                    whiteboardInstructions.NewTask();
                 }
                 else
                 {
@@ -331,9 +326,9 @@ public class LevelInteraction : MonoBehaviour
 
     private bool MaltPos() {
 
-        if ((Malt.transform.position.x < -0.03f && Malt.transform.position.x > -0.5f)
-            && (Malt.transform.position.y < 4.5f && Malt.transform.position.y > 3.2f)
-            && (Malt.transform.position.z < 3.85f && Malt.transform.position.z > 3.35f))
+        if ((malt.transform.position.x < -0.03f && malt.transform.position.x > -0.5f)
+            && (malt.transform.position.y < 4.5f && malt.transform.position.y > 3.2f)
+            && (malt.transform.position.z < 3.85f && malt.transform.position.z > 3.35f))
         {
             return true;
         }
@@ -346,9 +341,9 @@ public class LevelInteraction : MonoBehaviour
     private bool HopsPos()
     {
 
-        if ((Hops.transform.position.x < -2.75f && Hops.transform.position.x > -3.25f)
-            && (Hops.transform.position.y < 4.5f && Hops.transform.position.y > 3.2f)
-            && (Hops.transform.position.z < 3.85f && Hops.transform.position.z > 3.35f))
+        if ((hops.transform.position.x < -2.75f && hops.transform.position.x > -3.25f)
+            && (hops.transform.position.y < 4.5f && hops.transform.position.y > 3.2f)
+            && (hops.transform.position.z < 3.85f && hops.transform.position.z > 3.35f))
         {
             return true;
         }
@@ -361,9 +356,9 @@ public class LevelInteraction : MonoBehaviour
     private bool YeastPos()
     {
 
-        if ((Yeast.transform.position.x < -4.74f && Yeast.transform.position.x > -5.27f)
-            && (Yeast.transform.position.z < -0.67f && Yeast.transform.position.z > -1.2f)
-            && (Yeast.transform.position.y < 4.5f && Yeast.transform.position.y > 3.25f))
+        if ((yeast.transform.position.x < -4.74f && yeast.transform.position.x > -5.27f)
+            && (yeast.transform.position.z < -0.67f && yeast.transform.position.z > -1.2f)
+            && (yeast.transform.position.y < 4.5f && yeast.transform.position.y > 3.25f))
         {
             return true;
         }
@@ -371,5 +366,38 @@ public class LevelInteraction : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ResetLevel()
+    {
+        stage = 0;
+        temp = 20;
+        loopCounter = 0;
+        time = 0;
+        time2 = 0;
+        liquidClock = 0;
+        liquidTick = false;
+
+        ResetBuckets();
+
+        button1.GetComponent<MeshRenderer>().material = red;
+        button2.GetComponent<MeshRenderer>().material = red;
+        button3.GetComponent<MeshRenderer>().material = red;
+        button4.GetComponent<MeshRenderer>().material = red;
+        button5.GetComponent<MeshRenderer>().material = red;
+        button6.GetComponent<MeshRenderer>().material = red;
+        button7.GetComponent<MeshRenderer>().material = red;
+        button8.GetComponent<MeshRenderer>().material = red;
+
+    }
+
+    public void ResetBuckets()
+    {
+        malt.transform.position = new Vector3(5.621f, 1.197f, -1.5f);
+        malt.transform.rotation = bucketRotation;
+        hops.transform.position = new Vector3(5.621f, 1.197f, -2f);
+        hops.transform.rotation = bucketRotation;
+        yeast.transform.position = new Vector3(5.621f, 1.197f, -2.5f);
+        yeast.transform.rotation = bucketRotation;
     }
 }
