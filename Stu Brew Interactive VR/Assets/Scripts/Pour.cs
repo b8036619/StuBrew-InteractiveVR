@@ -6,7 +6,6 @@ public class Pour : MonoBehaviour
 {
     public int pourThreshold = 45;
     public Transform origin = null;
-    //public GameObject streamPrefab = null;
     public ParticleSystem particlePour;
 
     private bool isPouring = false;
